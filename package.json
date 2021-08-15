@@ -1,14 +1,15 @@
 {
   "id": "buuug7-img-cropper",
-  "displayName": "图片裁剪",
-  "version": "0.0.1",
-  "description": "buuug7-img-cropper",
+  "displayName": "优雅的图片裁剪",
+  "version": "0.0.3",
+  "description": "uniApp 图片裁剪插件",
   "keywords": [
     "cropper",
-    "image cropper",
+    "image",
+    "cropper",
     "图片裁剪",
     "裁剪"
-  ],
+],
   "repository": "",
   "engines": {
     "HBuilderX": "^3.1.0"
@@ -30,9 +31,9 @@
       "qq": "3190136675"
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
     },
     "npmurl": ""
   },
@@ -41,26 +42,26 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "y",
+        "aliyun": "y"
       },
       "client": {
         "App": {
-          "app-vue": "u",
+          "app-vue": "y",
           "app-nvue": "u"
         },
         "H5-mobile": {
-          "Safari": "u",
-          "Android Browser": "u",
-          "微信浏览器(Android)": "u",
-          "QQ浏览器(Android)": "u"
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
         },
         "H5-pc": {
-          "Chrome": "u",
-          "IE": "u",
-          "Edge": "u",
-          "Firefox": "u",
-          "Safari": "u"
+          "Chrome": "y",
+          "IE": "n",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
         },
         "小程序": {
           "微信": "u",
