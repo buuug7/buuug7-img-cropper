@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>图片裁剪</title>
+    <link rel="stylesheet" href="cropper.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="cropper.min.js"></script>
+    <script src="uni.webview.1.5.2.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="file-upload-box">
+      <input
+        id="my-input"
+        type="file"
+        class="hidden-input"
+        accept="image/png, image/jpeg"
+      />
+      <label for="my-input" class="input-label">+</label>
+    </div>
+
+    <div class="img-crop-area"></div>
+
+    <div class="previewAll">
+      <div class="preview"></div>
+      <div class="preview"></div>
+      <div class="preview"></div>
+      <div class="preview"></div>
+    </div>
+
+    <p>
+      <button class="btn disabled" id="save">确定</button>
+    </p>
+
+    <script>
+      const fileUploadBox = document.querySelector(".file-upload-box");
+      const saveBtn = document.querySelector("#save");
+      const previews = document.querySelectorAll(".preview");
+      let previewReady = false;
+
+      // some common config
+      const aspectRatio = 1 / 1;
+      const autoCropAre = 0.5;
+      const croppedWidth = 200;
+      const croppedHeight = croppedWidth * aspectRatio;
+
+      document.addEventListener("UniAppJSBridgeReady", Init);
+
+      async function Init(params) {
+        console.log(`uniAppSDK loaded`);
+
+        const env = await getEnv();
+        console.log("当前环境：" + JSON.stringify(env));
+
+        const imgDataUrl = await selectFile(env);
+
+        // hidden input box
+        fileUploadBox.style.display = "none";
+
+        // create image
+        const image = new Image();
+        image.src = imgDataUrl;
+        image.crossorigin = true;
+        document.querySelector(".img-crop-area").appendChild(image);
+
+        image.onload = function () {
+
+          const options = {
+            aspectRatio: aspectRatio,
+            autoCropAre: autoCropAre,
+            ready: function () {
+              var clone = this.cloneNode();
+
+              clone.className = "";
+              clone.style.cssText =
+                "display: block;" +
+                "width: 100%;" +
+                "min-width: 0;" +
+                "min-height: 0;" +
+                "max-width: none;" +
+                "max-height: none;";
+
+              each(previews, function (elem) {
+                elem.appendChild(clone.cloneNode());
+              });
+
+              previewReady = true;
+              saveBtn.classList.remove("disabled");
+            },
+            crop: function (event) {
+              if (!previewReady) {
+                return;
+              }
+
+              var data = event.detail;
+              var cropper = this.cropper;
+              var imageData = cropper.getImageData();
+              var previewAspectRatio = data.width / data.height;
+
+              each(previews, function (elem) {
+                var previewImage = elem.getElementsByTagName("img").item(0);
+
+                var previewWidth = elem.offsetWidth;
+                var previewHeight = previewWidth / previewAspectRatio;
+                var imageScaledRatio = data.width / previewWidth;
+
+                // elem.style.borderRadius = "50%";
+                elem.style.height = previewHeight + "px";
+                previewImage.style.width =
+                  imageData.naturalWidth / imageScaledRatio + "px";
+                previewImage.style.height =
+                  imageData.naturalHeight / imageScaledRatio + "px";
+                previewImage.style.marginLeft =
+                  -data.x / imageScaledRatio + "px";
+                previewImage.style.marginTop =
+                  -data.y / imageScaledRatio + "px";
+              });
+            },
+          };
+
+          const cropper = new Cropper(image, options);
+
+          save.addEventListener("click", () => {
+
+            const croppedCanvas = cropper.getCroppedCanvas({
+              width: croppedWidth,
+              height: croppedHeight
+            });
+
+            const dataUrl = croppedCanvas.toDataURL();
+
+            const postData = {
+              data: {
+                type: "croppedData",
+                dataUrl: dataUrl,
+              },
+            };
+
+            console.log(`postData`, postData);
+
+            if (env.plus) {
+              uni.postMessage(postData);
+            } else if (env.h5) {
+              top.postMessage(postData);
+            } else if (env.miniprogram) {
+              // 小程序
+              top.postMessage(postData);
+            }
+
+            // back to previous page
+            uni.navigateBack({
+              delta: 1,
+            });
+          });
+        };
+      }
+    </script>
+  </body>
+</html>
