@@ -8,7 +8,7 @@
 - 支持放大缩小
 - 导出支持 base64(dataUrl) 以及 blob 格式导出
 
-> 我们都知道 uniApp 中是无法操作 DOM, 而好多基于 DOM 的优秀库是无法在 uniApp 中使用, 如果要移植代价高昂(有些根本移植不了), 使用 webview 的方式去整合不妨是一种快捷的途径.
+> 我们都知道 uniApp 中是无法操作 DOM, 而好多基于 DOM 的优秀库无法在 uniApp 中直接使用, 如果要移植代价高昂(有些根本移植不了), 使用 webview 的方式去整合不妨是一种快捷的途径.
 
 ## screenshot
 
@@ -33,7 +33,6 @@
 ```json
 {
   "pages": [
-    // 在你的pages.json中增加该地址
     {
       "path": "uni_modules/buuug7-img-cropper/pages/cropper",
       "style": {
@@ -49,9 +48,21 @@
 在模板中你可以绑定给任何事件, 比如通过点击按钮来选择上传并裁剪图片
 
 ```vue
-<button type="default" plain="true" @click="chooseImg">
-  choose image
-</button>
+<template>
+  <view>
+    <view style="width: 10rem; margin: 1rem auto;">
+      <button type="default" plain="true" @click="chooseImg">
+        choose image
+      </button>
+    </view>
+
+    <view
+      style="display: flex;justify-content: center;align-items: center;margin-top: 1rem;"
+    >
+      <image :src="imgDataUrl" mode="aspectFit"></image>
+    </view>
+  </view>
+</template>
 ```
 
 在 script 中：
@@ -90,7 +101,7 @@ export default {
 
 ## 属性说明
 
-在 `uni_modules\buuug7-img-cropper\hybrid\html\cropper\index.js` 文件中, 你可以配置所有与 cropper.js 相关的配置, 下面是一些最常用的属性
+在 `uni_modules\buuug7-img-cropper\hybrid\html\cropper\index.js` 文件中, 你可以设置所有与 cropper.js 相关的选项, 下面是一些最常用的选项
 
 ```javascript
 // 宽高比
