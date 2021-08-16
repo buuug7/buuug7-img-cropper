@@ -1,7 +1,7 @@
 {
   "id": "buuug7-img-cropper",
-  "displayName": "优雅的图片裁剪",
-  "version": "0.0.6",
+  "displayName": "uniApp图片裁剪插件",
+  "version": "0.0.7",
   "description": "uniApp 图片裁剪插件",
   "keywords": [
     "cropper",

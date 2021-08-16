@@ -1,4 +1,4 @@
-# 优雅的图片裁剪(buuug7-img-cropper)
+# uniApp 图片裁剪插件 (buuug7-img-cropper)
 
 [uniApp](https://github.com/dcloudio/uni-app)图片裁剪插件. 该插件基于[Cropper.js](https://github.com/fengyuanchen/cropperjs), 感谢 cropper.js 优秀又强大的功能, 让裁剪图片变得容易, 本人使用 webview 的方式集成 cropper.js 跟 uniApp 进行数据交互, 可以满足图片裁剪的基本需求.
 
@@ -12,9 +12,9 @@
 
 ## screenshot
 
-<p align="center" display="flex">
-  <img src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_0.png?v=1629063946" width="300px" height="auto">
-  <img src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_1.png?v=1629138393" width="300px" height="auto">
+<p>
+  <img align=top src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_0.png?1629140763" width="300px" height="auto">
+  <img align=top src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_1.png?1629140738" width="300px" height="auto">
 </p>
 
 ## 支持
