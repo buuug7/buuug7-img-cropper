@@ -10,6 +10,13 @@
 
 > 我们都知道 uniApp 中是无法操作 DOM, 而好多基于 DOM 的优秀库是无法在 uniApp 中使用, 如果要移植代价高昂(有些根本移植不了), 使用 webview 的方式去整合不妨是一种快捷的途径.
 
+## screenshot
+
+<p align="center" display="flex">
+  <img src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_0.png?v=1629063946" width="300px" height="auto">
+  <img src="https://img-cdn-aliyun.dcloud.net.cn/stream/plugin_screens/ee108ae0-fe10-11eb-8b54-a9dfd3be275d_1.png?v=1629138393" width="300px" height="auto">
+</p>
+
 ## 支持
 
 - App 5+
@@ -21,7 +28,7 @@
 
 ## 用法
 
-在 `pages.json` 新增`uni_modules/buuug7-img-cropper/pages/cropper`页面配置
+在你项目中 `pages.json` 新增`uni_modules/buuug7-img-cropper/pages/cropper`页面配置
 
 ```json
 {
@@ -47,7 +54,7 @@
 </button>
 ```
 
-在 javascript 中：
+在 script 中：
 
 ```javascript
 export default {
@@ -83,15 +90,20 @@ export default {
 
 ## 属性说明
 
-在 `uni_modules\buuug7-img-cropper\hybrid\html\cropper\index.html` 文件中, 你可以配置所有与 cropper.js 相关的是属性, 下面是一些最常用的属性
+在 `uni_modules\buuug7-img-cropper\hybrid\html\cropper\index.js` 文件中, 你可以配置所有与 cropper.js 相关的配置, 下面是一些最常用的属性
 
-````javascript
-// some common config
-const aspectRatio = 1 / 16;
+```javascript
+// 宽高比
+const aspectRatio = 1 / 1;
+// 自动裁剪区域, 默认为 50%
 const autoCropAre = 0.5;
+// 裁剪宽度
 const croppedWidth = 200;
-const croppedHeight = croppedWidth * aspectRatio;```
-````
+// 裁剪高度
+const croppedHeight = croppedWidth * aspectRatio;
+// 是否裁剪为圆形
+const roundedCrop = true;
+```
 
 ## TODO
 
