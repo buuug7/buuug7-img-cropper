@@ -1,14 +1,15 @@
-# uniApp 图片裁剪插件 (buuug7-img-cropper)
+# uni-app 图片裁剪插件
 
-[uniApp](https://github.com/dcloudio/uni-app)图片裁剪插件. 该插件基于[Cropper.js](https://github.com/fengyuanchen/cropperjs), 感谢 cropper.js 优秀又强大的功能, 让裁剪图片变得容易, 本人使用 webview 的方式集成 cropper.js 跟 uniApp 进行数据交互, 可以满足图片裁剪的基本需求.
+[uni-app](https://github.com/dcloudio/uni-app) 图片裁剪插件. 该插件基于[Cropper.js](https://github.com/fengyuanchen/cropperjs), 感谢 cropper.js 优秀又强大的功能, 让裁剪图片变得容易, 本人使用 webview 的方式集成 cropper.js 跟 uni-app 进行数据交互, 可以满足图片裁剪的基本需求.
 
 - 支持裁剪预览
 - 支持设置长宽比
 - 支持设置裁剪大小
 - 支持放大缩小
+- 支持圆形裁剪
 - 导出支持 base64(dataUrl) 以及 blob 格式导出
 
-> 我们都知道 uniApp 中是无法操作 DOM, 而好多基于 DOM 的优秀库无法在 uniApp 中直接使用, 如果要移植代价高昂(有些根本移植不了), 使用 webview 的方式去整合不妨是一种快捷的途径.
+> 我们都知道 uni-app 中是无法操作 DOM, 而好多基于 DOM 的优秀库无法在 uni-app 中直接使用, 如果要移植代价高昂(有些根本移植不了), 使用 webview 的方式去整合不妨是一种快捷的途径.
 
 ## screenshot
 
@@ -21,6 +22,24 @@
 
 - App 5+
 - h5
+- 小程序
+
+## 微信小程序
+
+微信小程序需要将 webview 中加载的 html 设置为从网络加载, 并加入微信白名单, 详情见 [web-view](https://uniapp.dcloud.net.cn/component/web-view?id=web-view), 通常你需要将 `uni_modules\buuug7-img-cropper\hybrid\html\cropper` 目录复制到你 webserver 中, 然后修改 `uni_modules/buuug7-img-cropper/pages/cropper.vue` 中 `<web-view>` 组件 src 属性为你部署后访问的地址.
+
+```vue
+<template>
+  <view class="container">
+    <web-view
+      :webview-styles="webviewStyles"
+      @message="handleMessage"
+      :src="http://some-domain/cropper/index.html"
+    >
+    </web-view>
+  </view>
+</template>
+```
 
 ## 安装
 
